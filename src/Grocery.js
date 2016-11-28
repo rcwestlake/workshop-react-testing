@@ -8,7 +8,9 @@ const Grocery = ({ name, quantity, notes, purchased, starred, onPurchase, onStar
       <h3>{name}</h3>
       {quantity && <p className='Grocery-quantity'>Quantity: {quantity}</p>}
       {notes && <p className="Grocery-notes">{notes}</p>}
-      <button className="Grocery-purchase">{purchased ? 'Unpurchase' : 'Purchase'}</button>
+      <button
+        className="Grocery-purchase"
+        onClick={() => onPurchase}>{purchased ? 'Unpurchase' : 'Purchase'}</button>
       <button className="Grocery-star">{starred ? 'Unstar' : 'Star'}</button>
       <button className="Grocery-remove">Remove</button>
     </article>

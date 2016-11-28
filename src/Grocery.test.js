@@ -30,7 +30,6 @@ describe('Grocery', function() {
   it('should have a className of "purchased" if it is purchased', () => {
     const wrapper = shallow(<Grocery name="Beef" purchased={true} />);
     expect(wrapper.is('.purchased')).toEqual(true);
-
   });
 
   it('should not have a className of "purchased" if it is not purchased', () => {
@@ -42,7 +41,18 @@ describe('Grocery', function() {
     const wrapper = shallow(<Grocery name="Beef" />);
     expect(wrapper.is('.purchased')).toEqual(false);
   });
+});
 
+describe('Purchase functionality', () => {
+  it('should call the onPurchase prop when clicked', () => {
+    const onPurchaseMock = jest.fn();
+    const wrapper = mount(<Grocery name="Beef" quantity={'17 bunches'}/>);
+    wrapper.find('.Grocery-purchase').simulate('click');
+    expect(onPurchaseMock).toBeCalled();
+  });
+});
+
+describe('Grocery quantity and notes', () => {
   it('should have a p.Grocery-quantity element if a quantity is passed as a prop', () => {
     const wrapper = shallow(<Grocery name="Beef" quantity={'17 bunches'}/>);
     expect(wrapper.find('.Grocery-quantity').length).toEqual(1);
@@ -53,6 +63,11 @@ describe('Grocery', function() {
     expect(wrapper.find('.Grocery-quantity').length).toEqual(0);
   });
 
+  it('should display the correct quantity', () => {
+    const wrapper = shallow(<Grocery name="Beef" quantity={'10 lbs.'} />);
+    expect(wrapper.find('.Grocery-quantity').text()).toEqual('Quantity: 10 lbs.');
+  });
+
   it('should have a p.Grocery-notes element if notes are passed as a prop', () => {
     const wrapper = shallow(<Grocery name="Beef" notes="beef is so good" />);
     expect(wrapper.find('.Grocery-notes').length).toEqual(1);
@@ -61,6 +76,11 @@ describe('Grocery', function() {
   it('should NOT have a p.Grocery-notes element if notes are NOT passed as a prop', () => {
     const wrapper = shallow(<Grocery name="Beef" />);
     expect(wrapper.find('.Grocery-notes').length).toEqual(0);
+  });
+
+  it('should display the correct notes', () => {
+    const wrapper = shallow(<Grocery name="Beef" notes="beef is so good" />);
+    expect(wrapper.find('.Grocery-notes').text()).toEqual('beef is so good');
   });
 });
 
