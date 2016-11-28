@@ -44,6 +44,51 @@ describe('Grocery', function() {
   });
 
   it('should have a p.Grocery-quantity element if a quantity is passed as a prop', () => {
-    const wrapper = shallow(<Grocery name="Beef" quantity={'17 bunches'}/>)
+    const wrapper = shallow(<Grocery name="Beef" quantity={'17 bunches'}/>);
+    expect(wrapper.find('.Grocery-quantity').length).toEqual(1);
+  });
+
+  it('should not have a p.Grocery-quantity element if a quantity is NOT passed as a prop', () => {
+    const wrapper = shallow(<Grocery name="Beef" />);
+    expect(wrapper.find('.Grocery-quantity').length).toEqual(0);
+  });
+
+  it('should have a p.Grocery-notes element if notes are passed as a prop', () => {
+    const wrapper = shallow(<Grocery name="Beef" notes="beef is so good" />);
+    expect(wrapper.find('.Grocery-notes').length).toEqual(1);
+  });
+
+  it('should NOT have a p.Grocery-notes element if notes are NOT passed as a prop', () => {
+    const wrapper = shallow(<Grocery name="Beef" />);
+    expect(wrapper.find('.Grocery-notes').length).toEqual(0);
+  });
+});
+
+describe('.Grocery-purchase button', () => {
+  it('should have a text of "Purchase" if purchased is false', () => {
+    const wrapper = shallow(<Grocery name="Beef" purchased={false} />);
+    expect(wrapper.find('.Grocery-purchase').text()).toEqual('Purchase');
+  });
+
+  it('should have a text of "Unpurchase" if purchased is true', () => {
+    const wrapper = shallow(<Grocery name="Beef" purchased={true} />);
+    expect(wrapper.find('.Grocery-purchase').text()).toEqual('Unpurchase');
+  });
+});
+
+describe('.Grocery-star button', () => {
+  it('should have a text of "Star" if star is false', () => {
+    const wrapper = shallow(<Grocery name="Beef" starred={false} />);
+    expect(wrapper.find('.Grocery-star').text()).toEqual('Star');
+  });
+
+  it('should have a text of "Star" if starred is NOT passed as prop', () => {
+    const wrapper = shallow(<Grocery name="Beef" />);
+    expect(wrapper.find('.Grocery-star').text()).toEqual('Star');
+  });
+
+  it('should have a text of "Unstar" if starred is true', () => {
+    const wrapper = shallow(<Grocery name="Beef" starred={true} />);
+    expect(wrapper.find('.Grocery-star').text()).toEqual('Unstar');
   });
 });

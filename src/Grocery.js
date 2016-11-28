@@ -6,6 +6,11 @@ const Grocery = ({ name, quantity, notes, purchased, starred, onPurchase, onStar
   return (
     <article className={classnames(`Grocery ${starred ? 'starred' : ''} ${purchased ? 'purchased' : ''}`)}>
       <h3>{name}</h3>
+      {quantity && <p className='Grocery-quantity'>Quantity: {quantity}</p>}
+      {notes && <p className="Grocery-notes">{notes}</p>}
+      <button className="Grocery-purchase">{purchased ? 'Unpurchase' : 'Purchase'}</button>
+      <button className="Grocery-star">{starred ? 'Unstar' : 'Star'}</button>
+      <button className="Grocery-remove">Remove</button>
     </article>
   )
 }
