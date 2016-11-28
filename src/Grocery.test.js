@@ -46,7 +46,7 @@ describe('Grocery', function() {
 describe('Purchase functionality', () => {
   it('should call the onPurchase prop when clicked', () => {
     const onPurchaseMock = jest.fn();
-    const wrapper = mount(<Grocery name="Beef" quantity={'17 bunches'}/>);
+    const wrapper = mount(<Grocery name="Beef" quantity={'17 bunches'} onPurchase={onPurchaseMock} />);
     wrapper.find('.Grocery-purchase').simulate('click');
     expect(onPurchaseMock).toBeCalled();
   });
