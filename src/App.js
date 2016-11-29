@@ -7,7 +7,7 @@ class App extends Component {
     super(...props);
 
     this.state = {
-      groceries: this.props.groceries,
+      groceries: this.props.groceries || [],
     }
   }
   onPurchase() {
@@ -28,7 +28,12 @@ class App extends Component {
 
   render() {
     const { groceries } = this.state;
-    const disabledToggle = groceries ? false : true;
+
+    let disabledToggle = false;
+    if (groceries.length < 1) {
+      disabledToggle = true;
+    }
+
     return (
       <main>
         {groceries.map((item, i) => {
