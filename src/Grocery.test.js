@@ -43,15 +43,6 @@ describe('Grocery', function() {
   });
 });
 
-describe('Purchase functionality', () => {
-  it('should call the onPurchase prop when clicked', () => {
-    const onPurchaseMock = jest.fn();
-    const wrapper = mount(<Grocery name="Beef" quantity={'17 bunches'} onPurchase={onPurchaseMock} />);
-    wrapper.find('.Grocery-purchase').simulate('click');
-    expect(onPurchaseMock).toBeCalled();
-  });
-});
-
 describe('Grocery quantity and notes', () => {
   it('should have a p.Grocery-quantity element if a quantity is passed as a prop', () => {
     const wrapper = shallow(<Grocery name="Beef" quantity={'17 bunches'}/>);
@@ -110,5 +101,28 @@ describe('.Grocery-star button', () => {
   it('should have a text of "Unstar" if starred is true', () => {
     const wrapper = shallow(<Grocery name="Beef" starred={true} />);
     expect(wrapper.find('.Grocery-star').text()).toEqual('Unstar');
+  });
+});
+
+describe('Purchase, star, remove functionality', () => {
+  it('should call the onPurchase prop when clicked', () => {
+    const onPurchaseMock = jest.fn();
+    const wrapper = mount(<Grocery name="Beef" quantity={'17 bunches'} onPurchase={onPurchaseMock} />);
+    wrapper.find('.Grocery-purchase').simulate('click');
+    expect(onPurchaseMock).toBeCalled();
+  });
+
+  it('should call the onStar prop when clicked', () => {
+    const onStarMock = jest.fn();
+    const wrapper = mount(<Grocery name="Beef" quantity={'17 bunches'} onStar={onStarMock} />);
+    wrapper.find('.Grocery-star').simulate('click');
+    expect(onStarMock).toBeCalled();
+  });
+
+  it('should call the onDelete prop when clicked', () => {
+    const onDelete = jest.fn();
+    const wrapper = mount(<Grocery name="Beef" quantity={'17 bunches'} onDelete={onDelete} />);
+    wrapper.find('.Grocery-remove').simulate('click');
+    expect(onDelete).toBeCalled();
   });
 });
