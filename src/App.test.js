@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 import App from './App';
 
@@ -20,8 +19,40 @@ describe('App', () => {
       starred: true,
     }
   ]
-  it('should be a fake test', () => {
-    const wrapper = shallow(<App groceries={groceries} />);
-    expect(true).toEqual(true);
+  it('should have a clear button', () => {
+    const wrapper = mount(<App groceries={groceries} />);
+    expect(wrapper.find('.Grocery-clear').length).toEqual(1);
+  });
+
+  it.skip('should be disabled if grocery is empty', () => {
+    groceries = [];
+    const wrapper = mount(<App groceries={groceries} />);
+    expect(wrapper.is('disabled')).toEqual(true);
+  });
+});
+
+describe('Clear button', () => {
+  let groceries = [
+    {
+      id: 0,
+      name: 'Pizza',
+      quantity: 3,
+      purchased: false,
+      starred: false,
+    },
+    {
+      id: 1,
+      name: 'Ice cream',
+      quantity: '2 box',
+      purchased: false,
+      starred: true,
+    }
+  ]
+
+  it('should call the onClear func when clicked ', () => {
+    const onClearGroceriesMock = jest.fn();
+    const wrapper = mount(<App groceries={groceries} />);
+    wrapper.find('.Grocery-clear').simulate('click');
+    expect(onClearGroceriesMock).toBeCalled();
   });
 });

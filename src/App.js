@@ -45,9 +45,15 @@ class App extends Component {
             notes={item.notes}
             purchased={item.purchased}
             starred={item.starred}
+            onPurchase={this.onPurchase}
+            onDelete={this.onDelete}
+            onStar={this.onStar}
           />
         })}
-        <button className="Grocery-clear" disabled={disabledToggle}>
+        <button
+          className="Grocery-clear"
+          disabled={disabledToggle}
+          onClick={() => this.onClearGroceries()}>
           Clear Groceries
         </button>
       </main>

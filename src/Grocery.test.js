@@ -146,6 +146,7 @@ describe('User data', () => {
   ]
 
   it('should have the correct data length', () => {
-    expect(wrapper.find('.Grocery').length).toEqual(2);
+    const wrapper = mount(<Grocery />)
+    expect(wrapper.find('.Grocery').length).toEqual(1);
   });
 });
