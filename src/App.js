@@ -10,7 +10,7 @@ class App extends Component {
       groceries: this.props.groceries || [],
     }
   }
-  
+
   onPurchase() {
     console.log('purchase');
   }
@@ -51,6 +51,7 @@ class App extends Component {
             onStar={this.onStar}
           />
         })}
+        <p className='count'># of Items: {groceries.length}</p>
         <button
           className="Grocery-clear"
           disabled={disabledToggle}

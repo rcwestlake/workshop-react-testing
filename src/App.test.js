@@ -29,6 +29,17 @@ describe('App', () => {
     const wrapper = mount(<App groceries={groceries} />);
     expect(wrapper.is('disabled')).toEqual(true);
   });
+
+  it('should have a p.count', () => {
+    const wrapper = mount(<App groceries={groceries} />);
+    expect(wrapper.find('.count').text()).toEqual('# of Items: 2');
+  });
+
+  it('should have a p.count of 0 when there are no groceries', () => {
+    groceries = [];
+    const wrapper = mount(<App groceries={groceries} />);
+    expect(wrapper.find('.count').text()).toEqual('# of Items: 0');
+  });
 });
 
 describe('Clear button', () => {
