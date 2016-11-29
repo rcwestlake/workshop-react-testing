@@ -126,3 +126,26 @@ describe('Purchase, star, remove functionality', () => {
     expect(onDelete).toBeCalled();
   });
 });
+
+describe('User data', () => {
+  let groceries = [
+    {
+      id: 0,
+      name: 'Pizza',
+      quantity: 3,
+      purchased: false,
+      starred: false,
+    },
+    {
+      id: 1,
+      name: 'Ice cream',
+      quantity: '2 box',
+      purchased: false,
+      starred: true,
+    }
+  ]
+
+  it('should have the correct data length', () => {
+    expect(wrapper.find('.Grocery').length).toEqual(2);
+  });
+});

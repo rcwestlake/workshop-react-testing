@@ -2,54 +2,33 @@ import React, { Component } from 'react';
 import Grocery from './Grocery';
 import './App.css';
 
-let groceries = [
-  {
-    id: 0,
-    name: 'Beef',
-    quantity: '10 lbs.',
-    notes: 'Beef is one of the greatest things on Earth.',
-    purchased: false,
-    starred: false,
-  },
-  {
-    id: 1,
-    name: 'Bowtie pasta',
-    quantity: '3 bags',
-    notes: 'When you buy this, you feel like you are in Italy.',
-    purchased: true,
-    starred: false,
-  },
-  {
-    id: 2,
-    name: 'Protein shakes',
-    quantity: '30',
-    notes: 'Been pumping iron and need to refuel',
-    purchased: false,
-    starred: true,
-  }
-]
-
 class App extends Component {
-  constructor() {
-    super();
+  constructor(...props) {
+    super(...props);
 
     this.state = {
-      
+      groceries: this.props.groceries,
     }
   }
   onPurchase() {
-
+    console.log('purchase');
   }
 
   onStar() {
-
+    console.log('star');
   }
 
   onDelete() {
+    console.log('delete');
+  }
 
+  onClearGroceries() {
+    console.log('clear');
   }
 
   render() {
+    const { groceries } = this.state;
+    const disabledToggle = groceries ? false : true;
     return (
       <main>
         {groceries.map((item, i) => {
@@ -63,6 +42,9 @@ class App extends Component {
             starred={item.starred}
           />
         })}
+        <button className="Grocery-clear" disabled={disabledToggle}>
+          Clear Groceries
+        </button>
       </main>
     );
   }
