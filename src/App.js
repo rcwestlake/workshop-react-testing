@@ -10,6 +10,7 @@ class App extends Component {
       groceries: this.props.groceries || [],
     }
   }
+  
   onPurchase() {
     console.log('purchase');
   }
